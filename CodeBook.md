@@ -26,3 +26,21 @@ train_subjects: Contains table with integer numbers from 1 to 30 for every recor
 features: Contains table with the available 561 types of measurements
 
 activities: Contains table with the 6 activities under which data from volunteers participated were collected
+
+merged_ds: Contains a merged table made by combination of test and train data tables using rbind function. Initially, contains all columns, at a next step only those that refers to mean and std and finally activities and subjects are added using cbind function.
+
+mean_std_extr: Used to extract only mean and std measurements from merged_ds data table, and for that reason contains those names which have mean and std words as part of the name
+
+merged_labels: Contains a merged table made by combination of test_labels and train_labels using rbind function. The integer numbers in that table which corresponds to an activity label, in the end are substituted by that activity.
+
+merged_subjects: Contains a merged table made by combination of test_subjects and train_subjects using rbind function.
+
+tidy_ds: Contains the independent tidy data set with the average of each variable for each activity and each subject
+
+
+
+
+
+
+
+
