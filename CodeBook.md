@@ -37,6 +37,31 @@ merged_subjects: Contains a merged table made by combination of test_subjects an
 
 tidy_ds: Contains the independent tidy data set with the average of each variable for each activity and each subject
 
+# Activities done for getting and cleaning data until the final tidy data set
+
+First of all, a directory called data is created if it hasn't already done so, in which raw data from URL that fileURL variable indicates, are downloaded into it in a zip format. Then, unzip funtion is used to unzip compressed data into data directory. A new directory named "UCI HAR Dataset" is created.
+
+As a second step, variables test_ds, train_ds, test_labels, train_labels, test_subjects, train_subjects, features and activities are initiated with those values as described in the previous description section. 
+
+Next, test_ds and train_ds data frames merged using rbind funtion into merged_ds data frame. The same operation followed, also, for the creation of merged_labels and merged_subjects variables. Note that the arguments in rbind function have the same order in all the previous actions: test_ds, train_ds.
+
+Then, names of measurements from "V2" column of features.txt file are read and parentheses "()" are removed or more precisely are substituded by an empty string, using sub function. Also, "-" symbols replaced everywhere by "_", using gsub function. This is done so as to give a more descriptive name to variable names. With the resulted names merged_ds columns are named.
+
+Next, grep function is used to find those names of merged_ds, that contain the words mean and std. An inverted search is, also, done so as to reject measurements that contain words "meanFreq", such as "fBodyAcc-meanFreq()-X". The desired names are saved as a vector in mean_std_extr variable. Using this variable, merged_ds contains now, only the desired columns that refered to mean and std.
+
+In merged_labels data table is given the name "activities_id". Then is merged with activities table, so as to make relate activities ids with their corresponding activity, using merge function, in such a way to keep the length of merged_labels table. Name "activities" is given to that column, which contains the activities for every subject.
+
+The "activities" column by previous step is merged with those of merged_ds, using cbind function. The same happens with merged_subjects table, after "subjects" name is given to it.
+
+So, until now, merged_ds contains mean and std measurements as well as subjects and activities.
+
+Thean dplyr library is used, to summarise data of merged_ds and calculate average for each activity and each subject, using summarise_each function. Funtion "options" is used with "dplyr.width = Inf" argument to replace the default setting of summarise function and print all columns of data set. The resulted data set is saved in variable tidy_ds and is printed on screen.
+
+
+
+
+
+
 
 
 
